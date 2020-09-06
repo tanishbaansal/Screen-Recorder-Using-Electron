@@ -2,7 +2,7 @@
 
 1. git clone https://github.com/tanishbaansal/Screen-Recorder-Using-Electron.git
 2. cd Screen-Recorder-Using-Electron
-3. npm start
+3. npm install && npm start
 
 After app starts -
 1. Select the screen source you want to record from the dropdown 
