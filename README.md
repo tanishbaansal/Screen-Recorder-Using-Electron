@@ -1,6 +1,6 @@
 # Screen Recorder Using Electron
 
-1. Download the code
+1. git clone https://github.com/tanishbaansal/Screen-Recorder-Using-Electron.git
 2. cd Screen-Recorder-Using-Electron
 3. npm start
 
