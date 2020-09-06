@@ -1,7 +1,7 @@
 const video = document.querySelector('video');
-const startbtn = document.querySelector('#startBtn');
-const stopbtn = document.querySelector('#stopBtn');
-const videoselectionbtn = document.querySelector('#videoSelectBtn');
+const startbtn = document.getElementById('startBtn');
+const stopbtn = document.getElementById('stopBtn');
+const videoselectionbtn = document.getElementById('videoSelectBtn');
 let mediaRecorder;
 const recorderdChunks = [];
 videoselectionbtn.onclick = getVideoSources;
@@ -10,25 +10,45 @@ const { desktopCapturer, remote } = require('electron');
 const { dialog, Menu } = remote;
 const { writeFile } = require('fs');
 
-startbtn.onclick = e =>{
-  mediaRecorder.start();
-  startBtn.classList.add('is-danger');
-  startBtn.innerText = 'Recording';
-}
-
-stopbtn.onclick = e => {
+function mediastop(){
   mediaRecorder.stop();
   startBtn.classList.remove('is-danger');
   startBtn.innerText = 'Start';
+}
+
+
+startbtn.onclick = e =>{
+  if(e.srcElement.innerText==='Recording'){
+    mediastop();
+  }
+  else if(!video.srcObject){
+    dialog.showErrorBox('Source','Select the source first');
+  }
+  else{
+    mediaRecorder.start();
+    startBtn.classList.add('is-danger');
+    startBtn.innerText = 'Recording';
+  }
+}
+
+
+stopbtn.onclick = e => {
+  if (typeof mediaRecorder !== 'undefined') {
+    if(mediaRecorder.state!=='inactive'){
+      mediastop();
+    }
+  }
+  else{
+    dialog.showErrorBox('Recording','Start the recording first');
+  }
 };
 
 async function getVideoSources() {
     const inputSources = await desktopCapturer.getSources({
       types: ['window', 'screen']
     });
-  
     const videoOptionsMenu = Menu.buildFromTemplate(
-      inputSources.map(source => {
+      inputSources.filter(inputSources=>inputSources.name!=='Electron Screen Recorder').map(source => {
         return {
           label: source.name,
           click: () => selectSource(source)
