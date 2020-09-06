@@ -4,4 +4,4 @@
 2. Click on start 
 3. Click on stop to stop the recording and save the file .
 
-Happy Recording :)
+Happy Recording 😄 
