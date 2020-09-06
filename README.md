@@ -1,3 +1,7 @@
-# Screen-Recorder-Using-Electron
+# Screen Recorder Using Electron
 
-Simply select the screen source you want to record and click on start and after the recording click on stop and save the file .
+1. Select the screen source you want to record from the dropdown 
+2. Click on start 
+3. Click on stop to stop the recording and save the file .
+
+Happy Recording :)
